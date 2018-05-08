@@ -3,21 +3,21 @@ export class KongWebSocket {
     if (!KongWebSocket.instance) {
       KongWebSocket.instance = new KongWebSocket()
     }
-    return KongWebSocket.instance;
+    return KongWebSocket.instance
   }
 
   constructor() {
     var ws = new WebSocket(process.env.WS_URL)
-    ws.onopen = function (evt) {
-      console.log("connected websocket!")
+    ws.onopen = function(evt) {
+      console.log('connected websocket!')
     }
-    ws.onclose = function (evt) {
-      console.log("disconnected websocket!")
+    ws.onclose = function(evt) {
+      console.log('disconnected websocket!')
     }
-    ws.onmessage = function (evt) {
+    ws.onmessage = function(evt) {
       console.log(evt)
     }
-    ws.onerror = function (evt) {
+    ws.onerror = function(evt) {
       ws.close()
     }
 

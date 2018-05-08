@@ -14,8 +14,15 @@ import store from './store'
 
 import '@/icons' // icon
 import '@/permission' // permission control
+import { KongWebSocket } from '@/utils/ws'
 
 Vue.use(ElementUI, { locale })
+
+// 原型链
+// Vue.prototype.ws = KongWebSocket.getInstance()
+
+// 挂载到global
+global.ws = KongWebSocket.getInstance()
 
 Vue.config.productionTip = false
 
