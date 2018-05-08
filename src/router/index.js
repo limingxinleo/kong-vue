@@ -29,7 +29,7 @@ export const constantRouterMap = [
     name: '主页',
     hidden: true,
     children: [{
-      path: '主页',
+      path: 'dashboard',
       component: () => import('@/views/dashboard/index')
     }]
   },

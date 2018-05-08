@@ -1,5 +1,6 @@
 import { login, logout, getInfo } from '@/api/login'
 import { getToken, setToken, removeToken } from '@/utils/auth'
+import { KongWebSocket } from '@/utils/ws'
 
 const user = {
   state: {
@@ -33,6 +34,8 @@ const user = {
           const data = response.data
           setToken(data.token)
           commit('SET_TOKEN', data.token)
+          var kong = KongWebSocket.getInstance()
+          kong.ws.send(JSON.stringify({ id: 'init', data: { token: data.token }}))
           resolve()
         }).catch(error => {
           reject(error)

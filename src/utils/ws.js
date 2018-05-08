@@ -7,6 +7,7 @@ export class KongWebSocket {
   }
 
   constructor() {
+    var that = this
     var ws = new WebSocket(process.env.WS_URL)
     ws.onopen = function(evt) {
       console.log('connected websocket!')
@@ -15,7 +16,12 @@ export class KongWebSocket {
       console.log('disconnected websocket!')
     }
     ws.onmessage = function(evt) {
-      console.log(evt)
+      var res = JSON.parse(evt.data)
+      switch (res.id) {
+        case 'status':
+          that.nodes = res.data
+          break
+      }
     }
     ws.onerror = function(evt) {
       ws.close()
