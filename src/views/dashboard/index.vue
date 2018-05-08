@@ -1,20 +1,68 @@
 <template>
-    <div class="dashboard-container">
-        <div class="dashboard-text">name:{{name}}</div>
-        <div class="dashboard-text">roles:<span v-for='role in roles' :key='role'>{{role}}</span></div>
+    <div class="app-container">
+        <el-table :data="list" v-loading.body="listLoading" element-loading-text="Loading" border fit
+                  highlight-current-row>
+            <el-table-column align="center" label='ID' width="95">
+                <template slot-scope="scope">
+                    {{scope.row.node.id}}
+                </template>
+            </el-table-column>
+            <el-table-column label="节点名" width="110" align="center">
+                <template slot-scope="scope">
+                    <span>{{scope.row.node.name}}</span>
+                </template>
+            </el-table-column>
+            <el-table-column label="节点地址" align="center">
+                <template slot-scope="scope">
+                    <span>{{scope.row.node.url}}</span>
+                </template>
+            </el-table-column>
+            <el-table-column label="总链接数" width="110" align="center">
+                <template slot-scope="scope">
+                    {{scope.row.server.total_requests}}
+                </template>
+            </el-table-column>
+            <el-table-column label="接受的链接数" width="110" align="center">
+                <template slot-scope="scope">
+                    {{scope.row.server.connections_accepted}}
+                </template>
+            </el-table-column>
+            <el-table-column label="处理的链接数" width="110" align="center">
+                <template slot-scope="scope">
+                    {{scope.row.server.connections_handled}}
+                </template>
+            </el-table-column>
+            <el-table-column label="活跃的链接数" width="110" align="center">
+                <template slot-scope="scope">
+                    {{scope.row.server.connections_active}}
+                </template>
+            </el-table-column>
+        </el-table>
     </div>
 </template>
 
 <script>
-  import { mapGetters } from 'vuex'
+  import { KongWebSocket } from '@/utils/ws'
 
   export default {
     name: 'dashboard',
-    computed: {
-      ...mapGetters([
-        'name',
-        'roles'
-      ])
+    data() {
+      return {
+        list: []
+      }
+    },
+    created() {
+      var kong = KongWebSocket.getInstance()
+      this.list = kong.nodes
+      console.log(this.list)
+    },
+    methods: {
+      fetchData() {
+        var kong = KongWebSocket.getInstance()
+        if (typeof kong.nodes == 'array' && kong.nodes.length == 0) {
+          this.services()
+        }
+      }
     }
   }
 </script>

@@ -34,8 +34,7 @@ const user = {
           const data = response.data
           setToken(data.token)
           commit('SET_TOKEN', data.token)
-          var kong = KongWebSocket.getInstance()
-          kong.ws.send(JSON.stringify({ id: 'init', data: { token: data.token }}))
+          KongWebSocket.getInstance().init(data.token)
           resolve()
         }).catch(error => {
           reject(error)

@@ -28,5 +28,28 @@ export class KongWebSocket {
     }
 
     this.ws = ws
+    // 初始化节点列表
+    this.nodes = []
+  }
+
+  init(token) {
+    var data = {
+      id: 'init',
+      data: {
+        token: token
+      }
+    }
+    this.ws.send(JSON.stringify(data))
+  }
+
+  services(size = 10, next = null) {
+    var data = {
+      id: 'services',
+      data: {
+        size: size,
+        next: next
+      }
+    }
+    this.ws.send(JSON.stringify(data))
   }
 }
