@@ -1,6 +1,6 @@
 <template>
     <div class="app-container">
-        <el-table :data="list" v-loading.body="listLoading" element-loading-text="Loading" border fit
+        <el-table :data="list" element-loading-text="Loading" border fit
                   highlight-current-row>
             <el-table-column align="center" label='ID' width="95">
                 <template slot-scope="scope">
@@ -55,13 +55,19 @@
       var kong = KongWebSocket.getInstance()
       this.list = kong.nodes
       console.log(this.list)
+      this.fetchData()
     },
     methods: {
       fetchData() {
         var kong = KongWebSocket.getInstance()
-        if (typeof kong.nodes == 'array' && kong.nodes.length == 0) {
-          this.services()
-        }
+        console.log(kong.nodes)
+        kong.status()
+      }
+    },
+    watch: {
+      list(old, newValue) {
+        console.log(old)
+        console.log(newValue)
       }
     }
   }

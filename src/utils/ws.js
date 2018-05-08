@@ -52,4 +52,12 @@ export class KongWebSocket {
     }
     this.ws.send(JSON.stringify(data))
   }
+
+  status() {
+    var data = {
+      id: 'status',
+      data: {}
+    }
+    this.ws.send(JSON.stringify(data))
+  }
 }
