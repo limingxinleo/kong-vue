@@ -28,8 +28,6 @@ export class KongWebSocket {
     }
 
     this.ws = ws
-    // 初始化节点列表
-    this.nodes = []
   }
 
   init(token) {

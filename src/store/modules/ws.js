@@ -2,7 +2,8 @@ import { KongWebSocket } from '@/utils/ws'
 
 const ws = {
   state: {
-    nodes: KongWebSocket.getInstance().nodes || []
+    // 节点列表信息
+    nodes: []
   },
 
   mutations: {
@@ -11,9 +12,7 @@ const ws = {
     }
   },
 
-  actions: {
-
-  }
+  actions: {}
 }
 
 export default ws
