@@ -19,7 +19,7 @@ export class KongWebSocket {
       var res = JSON.parse(evt.data)
       switch (res.id) {
         case 'status':
-          that.nodes = res.data
+          global.vue.$store.commit('SET_NODES', res.data)
           break
       }
     }

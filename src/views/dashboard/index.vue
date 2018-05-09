@@ -1,6 +1,6 @@
 <template>
     <div class="app-container">
-        <el-table :data="list" element-loading-text="Loading" border fit
+        <el-table :data="nodes" element-loading-text="Loading" border fit
                   highlight-current-row>
             <el-table-column align="center" label='ID' width="95">
                 <template slot-scope="scope">
@@ -42,8 +42,8 @@
 </template>
 
 <script>
-  import { KongWebSocket } from '@/utils/ws'
-
+  import { mapGetters } from 'vuex'
+  
   export default {
     name: 'dashboard',
     data() {
@@ -51,24 +51,14 @@
         list: []
       }
     },
+    computed: {
+      ...mapGetters(['nodes'])
+    },
     created() {
-      var kong = KongWebSocket.getInstance()
-      this.list = kong.nodes
-      console.log(this.list)
-      this.fetchData()
     },
     methods: {
-      fetchData() {
-        var kong = KongWebSocket.getInstance()
-        console.log(kong.nodes)
-        kong.status()
-      }
     },
     watch: {
-      list(old, newValue) {
-        console.log(old)
-        console.log(newValue)
-      }
     }
   }
 </script>
