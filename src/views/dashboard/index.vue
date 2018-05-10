@@ -43,7 +43,8 @@
 
 <script>
   import { mapGetters } from 'vuex'
-  
+  import { KongWebSocket } from '@/utils/ws'
+
   export default {
     name: 'dashboard',
     data() {
@@ -55,11 +56,10 @@
       ...mapGetters(['nodes'])
     },
     created() {
+      KongWebSocket.getInstance().status()
     },
-    methods: {
-    },
-    watch: {
-    }
+    methods: {},
+    watch: {}
   }
 </script>
 

@@ -95,6 +95,26 @@ export const constantRouterMap = [
     ]
   },
   {
+    path: '/service',
+    component: Layout,
+    redirect: '/service/services',
+    name: '服务管理',
+    meta: { title: '服务管理', icon: 'example' },
+    children: [
+      {
+        path: 'services',
+        name: '服务列表',
+        component: () => import('@/views/service/services'),
+        meta: { title: '服务列表', icon: 'table' }
+      }, {
+        path: 'role_add',
+        name: '新增服务',
+        component: () => import('@/views/role/role_add'),
+        meta: { title: '新增服务', icon: 'table' }
+      }
+    ]
+  },
+  {
     path: '/example',
     component: Layout,
     redirect: '/example/table',
