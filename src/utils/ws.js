@@ -28,6 +28,9 @@ export class KongWebSocket {
         case 'deleteService':
           that.services(10)
           break
+        case 'routes':
+          global.vue.$store.commit('SET_ROUTES', res.data)
+          break
       }
     }
     ws.onerror = function(evt) {
@@ -52,7 +55,18 @@ export class KongWebSocket {
       id: 'services',
       data: {
         size: size,
-        next: next
+        offset: next
+      }
+    }
+    this.ws.send(JSON.stringify(data))
+  }
+
+  routes(size = 10, offset = null) {
+    var data = {
+      id: 'routes',
+      data: {
+        size: size,
+        offset: offset
       }
     }
     this.ws.send(JSON.stringify(data))

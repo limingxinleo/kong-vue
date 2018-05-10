@@ -95,22 +95,42 @@ export const constantRouterMap = [
     ]
   },
   {
-    path: '/service',
+    path: '/kong-service',
     component: Layout,
-    redirect: '/service/services',
-    name: '服务管理',
-    meta: { title: '服务管理', icon: 'example' },
+    redirect: '/kong-service/services',
+    name: 'KONG服务管理',
+    meta: { title: 'KONG服务管理', icon: 'example' },
     children: [
       {
         path: 'services',
         name: '服务列表',
-        component: () => import('@/views/service/services'),
+        component: () => import('@/views/kong/service/services'),
         meta: { title: '服务列表', icon: 'table' }
       }, {
         path: 'service_add',
         name: '新增服务',
-        component: () => import('@/views/service/service_add'),
+        component: () => import('@/views/kong/service/service_add'),
         meta: { title: '新增服务', icon: 'table' }
+      }
+    ]
+  },
+  {
+    path: '/kong-route',
+    component: Layout,
+    redirect: '/kong-route/routes',
+    name: 'KONG路由管理',
+    meta: { title: 'KONG路由管理', icon: 'example' },
+    children: [
+      {
+        path: 'routes',
+        name: '路由列表',
+        component: () => import('@/views/kong/route/routes'),
+        meta: { title: '路由列表', icon: 'table' }
+      }, {
+        path: 'route_add',
+        name: '新增路由',
+        component: () => import('@/views/kong/route/route_add'),
+        meta: { title: '新增路由', icon: 'table' }
       }
     ]
   },

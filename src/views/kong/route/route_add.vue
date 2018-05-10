@@ -1,6 +1,6 @@
 <template>
     <div class="app-container">
-        <el-form ref="route_add" :model="form" label-width="120px">
+        <el-form ref="route_add" :model="form" label-width="180px">
             <el-form-item label="名字 name">
                 <el-input v-model="form.name"></el-input>
             </el-form-item>
