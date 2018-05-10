@@ -4,6 +4,7 @@ const ws = {
     nodes: [],
     services: [],
     routes: [],
+    serviceInfo: {},
   },
 
   mutations: {
@@ -15,6 +16,9 @@ const ws = {
     },
     SET_ROUTES: (state, routes) => {
       state.routes = routes
+    },
+    SET_SERVICE_INFO: (state, info) => {
+      state.serviceInfo = info
     }
   },
 

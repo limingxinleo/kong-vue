@@ -52,6 +52,7 @@
             <el-table-column align="center" label='操作' width="160">
                 <template slot-scope="scope">
                     <el-button type="success" size="mini" @click="editService(scope.row)">编辑</el-button>
+                    <el-button type="success" size="mini" @click="serviceInfo(scope.row.id)">详情</el-button>
                     <el-button type="danger" size="mini" @click="deleteService(scope.row.id)">删除</el-button>
                 </template>
             </el-table-column>
@@ -132,6 +133,10 @@
       deleteService(id) {
         var kong = KongWebSocket.getInstance()
         kong.deleteService(id)
+      },
+      serviceInfo(id) {
+        this.$router.push({ name: 'kong.service.info', params: { id: id } })
+
       },
       onCancel() {
         this.dialogTableVisible = false

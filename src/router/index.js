@@ -19,8 +19,8 @@ import Layout from '../views/layout/Layout'
   }
  **/
 export const constantRouterMap = [
-  { path: '/login', component: () => import('@/views/login/index'), hidden: true },
-  { path: '/404', component: () => import('@/views/404'), hidden: true },
+  { path: '/login', component: () => import('@/views/login/index'), hidden: true, name: 'login' },
+  { path: '/404', component: () => import('@/views/404'), hidden: true, name: '404' },
 
   {
     path: '/',
@@ -103,14 +103,20 @@ export const constantRouterMap = [
     children: [
       {
         path: 'services',
-        name: '服务列表',
+        name: 'kong.service',
         component: () => import('@/views/kong/service/services'),
         meta: { title: '服务列表', icon: 'table' }
       }, {
         path: 'service_add',
-        name: '新增服务',
+        name: 'kong.service.add',
         component: () => import('@/views/kong/service/service_add'),
         meta: { title: '新增服务', icon: 'table' }
+      }, {
+        path: 'service_info/:id',
+        name: 'kong.service.info',
+        hidden: true,
+        component: () => import('@/views/kong/service/service_info'),
+        meta: { title: '服务详情', icon: 'table' }
       }
     ]
   },

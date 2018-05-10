@@ -14,6 +14,7 @@ export class KongWebSocket {
     }
     ws.onclose = function(evt) {
       console.log('disconnected websocket!')
+      global.vue.$router.push({ name: 'login' })
     }
     ws.onmessage = function(evt) {
       var res = JSON.parse(evt.data)
@@ -30,6 +31,9 @@ export class KongWebSocket {
           break
         case 'routes':
           global.vue.$store.commit('SET_ROUTES', res.data)
+          break
+        case 'serviceInfo':
+          global.vue.$store.commit('SET_SERVICE_INFO', res.data)
           break
       }
     }
@@ -56,6 +60,16 @@ export class KongWebSocket {
       data: {
         size: size,
         offset: next
+      }
+    }
+    this.ws.send(JSON.stringify(data))
+  }
+
+  serviceInfo(id) {
+    var data = {
+      id: 'serviceInfo',
+      data: {
+        id: id
       }
     }
     this.ws.send(JSON.stringify(data))
