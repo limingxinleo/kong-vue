@@ -107,9 +107,9 @@ export const constantRouterMap = [
         component: () => import('@/views/service/services'),
         meta: { title: '服务列表', icon: 'table' }
       }, {
-        path: 'role_add',
+        path: 'service_add',
         name: '新增服务',
-        component: () => import('@/views/role/role_add'),
+        component: () => import('@/views/service/service_add'),
         meta: { title: '新增服务', icon: 'table' }
       }
     ]

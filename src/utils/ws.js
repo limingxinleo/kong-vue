@@ -7,6 +7,7 @@ export class KongWebSocket {
   }
 
   constructor() {
+    const that = this
     var ws = new WebSocket(process.env.WS_URL)
     ws.onopen = function(evt) {
       console.log('connected websocket!')
@@ -23,6 +24,9 @@ export class KongWebSocket {
           break
         case 'services':
           global.vue.$store.commit('SET_SERVICES', res.data)
+          break
+        case 'deleteService':
+          that.services(10)
           break
       }
     }
@@ -58,6 +62,16 @@ export class KongWebSocket {
     var data = {
       id: 'upsertService',
       data: form
+    }
+    this.ws.send(JSON.stringify(data))
+  }
+
+  deleteService(id) {
+    var data = {
+      id: 'deleteService',
+      data: {
+        id: id
+      }
     }
     this.ws.send(JSON.stringify(data))
   }
